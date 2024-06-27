@@ -7,5 +7,5 @@ logger.add('./Logs/Error.log', level='ERROR', retention='7 days', encoding='utf-
 
 # api配置
 API_HOST = '0.0.0.0'
-API_PORT = 7000
+API_PORT = 8080
 API_THREADED = True
