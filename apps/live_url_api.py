@@ -27,16 +27,20 @@ class LiveUrl(Resource):
         # 定义消息体
         return_data = self.return_data.copy()
         # 接收front参数
-        args = self.reqparse.parse_args()
-        live_platform = args.get('live_platform')
-        parameter = args.get('parameter')
-        logger.info(f"req: live_platform-{live_platform} parameter-{parameter}")
-        live_url = RunScripts(live_platform, parameter).choice()
-        logger.info(f"res: live_platform-{live_platform} parameter-{parameter} res-{live_url}")
-        if not live_url:
-            return return_data
-        return_data['state'] = 1
-        return_data['data'] = live_url
+        try:
+            # 尝试执行的代码
+            args = self.reqparse.parse_args()
+            live_platform = args.get('live_platform')
+            parameter = args.get('parameter')
+            logger.info(f"req: live_platform-{live_platform} parameter-{parameter}")
+            live_url = RunScripts(live_platform, parameter).choice()
+            logger.info(f"res: live_platform-{live_platform} parameter-{parameter} res-{live_url}")
+            if live_url:
+                return_data['state'] = 1
+                return_data['data'] = live_url
+        except Exception as e:
+            # 捕获并处理特定类型的异常
+            logger.warning(f"发生错误: {e}")
         return return_data
 
 
