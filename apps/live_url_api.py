@@ -19,8 +19,8 @@ class LiveUrl(Resource):
     def __init__(self):
         self.return_data = return_model
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('live_platform', type=str, required=True, help='直播平台')
-        self.reqparse.add_argument('parameter', type=str, required=True, help='需要解析的内容')
+        self.reqparse.add_argument('live_platform', type=str, required=True, help='直播平台',location='args')
+        self.reqparse.add_argument('parameter', type=str, required=True, help='需要解析的内容',location='args')
         super(LiveUrl, self).__init__()
 
     def get(self):
